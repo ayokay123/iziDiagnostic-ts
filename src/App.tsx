@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC, FormEvent, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import "./App.css";
 
-function App() {
+import { RootState } from "./store";
+import { getSymptoms } from "./store/actions/symptomsAction";
+import { getToken } from './store/actions/tokenAction';
+import { getDiagnostic } from './store/actions/diagnosticAction';
+
+const App: FC = () => {
+  const dispatch = useDispatch();
+  const tokenData = useSelector((state: RootState) => state.token.token);
+  const symptomsData = useSelector((state: RootState) => state.symptoms.symptoms);
+
+  useEffect(() => {
+    dispatch(getToken())    
+  }, [])
+
+  useEffect(() => {
+    if (tokenData) {
+      dispatch(getSymptoms(tokenData))
+    }
+  }, [tokenData])
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    dispatch(getDiagnostic(tokenData, [symptomsData[1]], 1999))
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <div className="has-text-centered">
+    <form onSubmit={handleSubmit}>
+      <button type="submit">ok</button>
+    </form>
+  </div>
   );
-}
+};
 
 export default App;
