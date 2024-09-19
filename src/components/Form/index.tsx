@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MultiSelect from "react-multi-select-component";
+import { MultiSelect } from "react-multi-select-component";
 import { RootState } from "../../store";
 import { getSymptoms } from "../../store/actions/symptomsAction";
 import {
@@ -8,7 +8,7 @@ import {
   setLoading,
 } from "../../store/actions/diagnosticAction";
 
-const wait = (timeout: number) => new Promise((rs) => setTimeout(rs, timeout))
+const wait = (timeout: number) => new Promise((rs) => setTimeout(rs, timeout));
 
 export default function Form(): ReactElement {
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ export default function Form(): ReactElement {
     }
 
     dispatch(setLoading());
-    await wait(5000)
+    await wait(5000);
     dispatch(getDiagnostic(tokenData, newArray, year));
 
     setSelected([]);

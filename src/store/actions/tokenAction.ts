@@ -1,11 +1,7 @@
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "..";
-import {
-  TokenAction,
-  Token,
-  GET_TOKEN
-} from "../types";
-import credentials from "./../../creditantials.json";
+import { TokenAction, Token, GET_TOKEN } from "../types";
+import credentials from "./../../credentials.json";
 
 const CryptoJS = require("crypto-js");
 
